@@ -20,9 +20,3 @@ def bce():
     Binary cross-entropy
     """
     pass
-
-
-def backprop(
-    error,
-):
-    pass
