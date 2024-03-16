@@ -11,7 +11,7 @@ class Linear:
 
     def forward(self, X):
         """Apply the linear Combination"""
-        return X.T * self.weights
+        return (X).dot(self.weights.T)
 
 
 class Conv2d:
