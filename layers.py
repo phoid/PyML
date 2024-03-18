@@ -1,4 +1,5 @@
 import numpy as np
+import weights
 
 
 class Linear:
@@ -7,7 +8,7 @@ class Linear:
     """
 
     def __init__(self, nIn, nOut, bias=True):
-        self.weights = np.random.rand(nOut, nIn) - 0.5
+        self.weights = weights.kaiming(nIn, nOut)
         if bias:
             self.bias = np.random.rand(nOut) - 0.5
         else:
@@ -24,9 +25,6 @@ class Conv2d:
     """
 
     def __init__(self):
-        pass
-
-    def backprop():
         pass
 
     def forward():
