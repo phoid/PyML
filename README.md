@@ -1,10 +1,11 @@
 # PyML (pie - M L) 
+A Light weight standalone Machine learning framework
 
 **Disclaimer** This project is a way for me to learn more about implementing Deep Learning programatically, not intended (for now) to be a distribution of any kind
 
 PyML is intended to be a very low level implementation of Deep Learning, using only numpy for math. It will allow the user to create pieces of typical ANNs and put them together themselves
 
-ex: This is an implementation of a 2 layer linear regression model for 1 input:
+Ex: This is an implementation of a 2 layer linear regression model for 1 input:
 ```
 input = layers.Linear(1, 6)
 output = layers.Linear(6, 1)
@@ -26,7 +27,7 @@ for i in range(epochs):
         output.weights = output.weights - layer2grad
         input.weights = input.weights - layer1grad
 ```
-Model achieves > 99% accuracy on y = mx + b
+Model achieves > 99% accuracy on y = mx + b.
 It's clear that this can become very messy very quickly with more complex models.
 
 While tedious, my hope is that PyML would ultimately be useful for learning and getting started in deeplearning by abstracting enough to be useable, but not so much as to mystify the inner workings on an ANN.
