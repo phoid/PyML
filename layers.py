@@ -4,7 +4,9 @@ import weights
 
 class Linear:
     """
-    defines the weights matrix for an individual linear layer
+    Define the weights matrix for an individual linear layer
+
+    Able to perform a linear operation on input data
     """
 
     def __init__(self, nIn, nOut, bias=True):
@@ -25,7 +27,7 @@ class Conv2d:
     """
 
     def __init__(self):
-        pass
+        self.weights = weights.kaiming(nIn, nOut)
 
     def forward():
         pass
