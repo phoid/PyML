@@ -15,6 +15,7 @@ def stochastic(input, cost, weights=None, lr=0.001, clip=True, norm=1.0):
 
 
 def clip_by_norm(gradients, max_norm=1.0):
+    """Clips gradiants based on the norm of the gradients."""
     norm = np.linalg.norm(gradients)
     if norm > max_norm:
         clipping_factor = max_norm / norm
