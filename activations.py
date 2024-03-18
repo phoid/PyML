@@ -10,6 +10,7 @@ def relu(x):
 
 
 def relu_deriv(x):
+    """derivitive of ReLU"""
     return (x > 0).astype(float)
 
 

@@ -5,5 +5,5 @@ def dropout():
     pass
 
 
-def batchnorm1d():
-    pass
+def batchnorm1d(batch):
+    return
