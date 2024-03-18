@@ -30,14 +30,14 @@ for i in range(epochs):
         pass2 = output.forward(a.relu(pass1))
 
         # calculating loss
-        print(f"pred = {pass2 * - 1}")
+        print(f"pred = {pass2 * -1}")
         loss = lf.mse(labels[i], pass2 * -1)
         # print("A1: ", np.array([pass1]).T)
         print("loss: ", loss)
 
         # back propogation
-        layer2grad = grad.stochastic(pass1, loss, lr=0.001)
-        layer1grad = grad.stochastic(X, loss, output.weights, lr=0.001)
+        layer2grad = grad.stochastic(pass1, loss, lr=0.0001)
+        layer1grad = grad.stochastic(X, loss, output.weights, lr=0.0001)
 
         print("l2grad: ", layer2grad, " l1grad: ", layer1grad)
         print("al2weights: ", output.weights, " al1weights: ", input.weights)
@@ -48,15 +48,13 @@ for i in range(epochs):
 
 
 # test
-def printn(val):
+def printn(string):
     print("-" * 40)
-    print(val)
+    print(string)
 
 
 val = 15
 printn(f"input is {val}")
-printn(
+print(
     f"this is the pred  {output.forward(a.relu(input.forward(np.array([val])))) * -1}"
 )
-printn(input.weights)
-printn(output.weights)
