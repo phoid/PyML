@@ -5,7 +5,7 @@ def mse(Y, yHat):
     """
     Mean-squared error
     """
-    return ((Y - yHat) ** 2) / len(yHat)
+    return np.mean(((Y - yHat) ** 2))
 
 
 def mae():
