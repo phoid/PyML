@@ -21,7 +21,7 @@ def sample(n=10, m=1):
 
 data, labels = sample(m=2)
 
-epochs = 12
+epochs = 50
 for i in range(epochs):
     print(f"This is epoch {i}", "\n", "-" * 80)
     for i, X in enumerate(data):
@@ -34,11 +34,14 @@ for i in range(epochs):
         loss = lf.mse(labels[i], pass2 * -1)
         # print("A1: ", np.array([pass1]).T)
         print("loss: ", loss)
+
         # back propogation
-        layer2grad = grad.stochastic(pass1, loss, lr=0.0001)
-        layer1grad = grad.stochastic(X, loss, output.weights, lr=0.0001)
+        layer2grad = grad.stochastic(pass1, loss, lr=0.001)
+        layer1grad = grad.stochastic(X, loss, output.weights, lr=0.001)
+
         print("l2grad: ", layer2grad, " l1grad: ", layer1grad)
         print("al2weights: ", output.weights, " al1weights: ", input.weights)
+
         output.weights = output.weights - layer2grad
         input.weights = input.weights - layer1grad
         print("bl2weights: ", output.weights, " bl1weights: ", input.weights)
