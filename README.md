@@ -4,11 +4,13 @@
 
 PyML is intended to be a very low level implementation of Deep Learning, using only numpy for math. It will allow the user to create pieces of typical ANNs and put them together themselves
 
-i.e
-- Define one or more layers (manually)
-- forward prop over each one (manually)
-- backprop (manually)
-- repeat (not manually thankfully)
+ex: This is an implementation of a 2 layer linear regression model:
+'''
+input = l.Linear(1, 6)
+
+output = l.Linear(6, 1)
+'''
+
 
 While tedious, my hope is that PyML would ultimately be useful for learning and getting started in deeplearning by abstracting enough to be useable, but not so much as to mystify the inner workings on an ANN.
 Additionally, It's meant to be lightweight and simple in hopes to not distract with the seemingly endless different options for layers, optimizers, regularizers, etc. 
