@@ -28,25 +28,37 @@ for i in range(epochs):
     print(f"This is epoch {i}", "\n", "-" * 80)
     for ind in shuffled:
 
-        pass1 = input.forward(data[ind])
-        pass2 = output.forward(a.relu(pass1))
+        # Forward pass
+        z1 = input.forward(norm_data[ind])
+        a1 = a.relu(z1)
+        z2 = output.forward(a1)
+        a2 = z2  # Linear activation for output
 
         # calculating loss
-        # print(f"pred = {pass2 * -1}")
-        loss = lf.mse(labels[ind], pass2)
-        # print("A1: ", np.array([pass1]).T)
+        loss = lf.mse(labels[ind], a2)
         print("loss: ", loss)
 
-        # back propogation
-        layer2grad = grad.stochastic(pass1, loss, lr=0.0001)
-        layer1grad = grad.stochastic(data[ind], loss, output.weights, lr=0.0001)
+        # Backward pass
+        # Output layer error (delta2)
+        delta2 = lf.mse_prime(labels[ind], a2)
 
-        print("l2grad: ", layer2grad, " l1grad: ", layer1grad)
-        print("al2weights: ", output.weights, " al1weights: ", input.weights)
+        # Hidden layer error (delta1)
+        # Backpropagate error through weights and activation derivative
+        delta1 = np.dot(delta2, output.weights) * a.relu_deriv(z1)
 
-        output.weights = output.weights - layer2grad
-        input.weights = input.weights - layer1grad
-        # print("bl2weights: ", output.weights, " bl1weights: ", input.weights)
+        # Calculate gradients
+        layer2_update = grad.calc_gradient(a1, delta2, lr=0.0001)
+        layer1_update = grad.calc_gradient(norm_data[ind], delta1, lr=0.0001)
+
+        # Update weights
+        output.weights -= layer2_update
+        input.weights -= layer1_update
+
+        # Update biases
+        if hasattr(output, 'bias'):
+            output.bias -= 0.0001 * delta2
+        if hasattr(input, 'bias'):
+            input.bias -= 0.0001 * delta1
 
 
 # test
@@ -57,4 +69,8 @@ def printn(string):
 
 val = 15
 printn(f"input is {val}")
-print(f"this is the pred  {output.forward(a.relu(input.forward(np.array([val]))))}")
+# Forward pass for test
+z1 = input.forward(np.array([val / data.max()]))
+a1 = a.relu(z1)
+pred = output.forward(a1)
+print(f"this is the pred  {pred}")

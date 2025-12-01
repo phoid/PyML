@@ -18,6 +18,8 @@ class Linear:
 
     def forward(self, X):
         """Apply the linear Combination"""
+        if hasattr(self, 'bias'):
+            return (X).dot(self.weights.T) + self.bias
         return (X).dot(self.weights.T)
 
 

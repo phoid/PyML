@@ -8,6 +8,14 @@ def mse(Y, yHat):
     return np.mean(((Y - yHat) ** 2))
 
 
+def mse_prime(Y, yHat):
+    """
+    Derivative of Mean-squared error
+    """
+    return 2 * (yHat - Y) / Y.size
+
+
+
 def mae():
     """
     Mean-absolute error

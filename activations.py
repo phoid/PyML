@@ -22,18 +22,31 @@ def leaky_relu(x, negative_slope=0.01):
     return np.maximum(x, x * negative_slope)
 
 
-def sigmoid():
+def leaky_relu_deriv(x, negative_slope=0.01):
+    """derivative of leaky ReLU"""
+    dx = np.ones_like(x)
+    dx[x < 0] = negative_slope
+    return dx
+
+
+def sigmoid(x):
     """
     Applies Sigmoid to a matrix:
 
     """
-    pass
+    return 1 / (1 + np.exp(-x))
 
 
-def softmax():
+def sigmoid_deriv(x):
+    """derivative of Sigmoid"""
+    s = sigmoid(x)
+    return s * (1 - s)
+
+
+def softmax(x):
     """
     Applies softmax to a matrix:
 
-
     """
-    pass
+    e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
+    return e_x / np.sum(e_x, axis=-1, keepdims=True)
