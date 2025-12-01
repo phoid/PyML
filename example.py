@@ -34,10 +34,6 @@ for i in range(epochs):
         z2 = output.forward(a1)
         a2 = z2  # Linear activation for output
 
-        # calculating loss
-        loss = lf.mse(labels[ind], a2)
-        print("loss: ", loss)
-
         # Backward pass
         # Output layer error (delta2)
         delta2 = lf.mse_prime(labels[ind], a2)
